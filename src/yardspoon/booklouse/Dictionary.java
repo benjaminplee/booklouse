@@ -1,4 +1,3 @@
-
 package yardspoon.booklouse;
 
 import java.io.BufferedReader;
@@ -8,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 class Dictionary {
+
     private final List<String> wordList;
 
     Dictionary() {
@@ -16,7 +16,7 @@ class Dictionary {
 
     void load(BufferedReader bufferedReader) throws IOException {
         String word = null;
-        while((word = bufferedReader.readLine()) != null) {
+        while ((word = bufferedReader.readLine()) != null) {
             wordList.add(word);
         }
 
@@ -30,17 +30,16 @@ class Dictionary {
     LookupResult lookup(String candidate) {
         int index = Collections.binarySearch(wordList, candidate);
 
-        if(index >= 0) {
-            if(index < size() - 1 && wordList.get(index + 1).startsWith(candidate)) {
+        if (index >= 0) {
+            if (index < size() - 1 && wordList.get(index + 1).startsWith(candidate)) {
                 return LookupResult.FOUND_PREFIX;
             }
 
             return LookupResult.FOUND_NOT_PREFIX;
-        }
-        else {
+        } else {
             index = (index + 1) * -1;
 
-            if(index < size() && wordList.get(index).startsWith(candidate)) {
+            if (index < size() && wordList.get(index).startsWith(candidate)) {
                 return LookupResult.NOT_FOUND_PREFIX;
             }
 
