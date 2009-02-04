@@ -3,8 +3,6 @@ package yardspoon.booklouse;
 public class SubImageFinder {
 
     Point find(Image base, Image target) {
-        Point result = null;
-
         for (int base_x = 0; base_x < base.getWidth() - target.getWidth() + 1; base_x++) {
             for (int base_y = 0; base_y < base.getHeight() - target.getHeight() + 1; base_y++) {
                 
@@ -22,7 +20,7 @@ public class SubImageFinder {
             }
         }
 
-        return result;
+        return null;
     }
 
     private boolean pixelsAreEqual(final int[] basePixel, final int[] targetPixel) {

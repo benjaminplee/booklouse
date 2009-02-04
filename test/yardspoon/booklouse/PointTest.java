@@ -31,4 +31,13 @@ public class PointTest {
         assertFalse(p.equals(p2));
         assertFalse(p.equals(null));
     }
+
+    @Test
+    public void pointCanPrint() {
+        Point p1 = new Point(3, 10);
+        Point p2 = new Point(0, 2);
+
+        assertEquals("(3,10)", p1.toString());
+        assertEquals("(0,2)", p2.toString());
+    }
 }

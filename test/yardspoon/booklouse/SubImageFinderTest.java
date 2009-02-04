@@ -1,5 +1,9 @@
 package yardspoon.booklouse;
 
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -73,39 +77,15 @@ public class SubImageFinderTest {
         assertNotNull(result);
         assertEquals(new Point(3, 2), result);
     }
-}
 
-class MockImage implements Image {
+    @Test
+    public void findImageBasedOnBufferedImage() throws IOException {
+        BufferedImage bufferedImage = ImageIO.read(new FileInputStream("test/data/example_desktop.png"));
+        Image base = new BufferedImageAdapter(bufferedImage);
+        Image target = new BufferedImageAdapter(bufferedImage.getSubimage(20, 30, 20, 20));
 
-    private final int width;
-    private final int height;
-    private final int[][][] pixels;
+        Point result = finder.find(base, target);
 
-    MockImage(int width, int height) {
-        this.width = width;
-        this.height = height;
-        pixels = new int[width][height][3];
+        assertEquals(new Point(20, 30), result);
     }
-
-    void setPixel(int x, int y, int red, int green, int blue) {
-        pixels[x][y][0] = red;
-        pixels[x][y][1] = green;
-        pixels[x][y][2] = blue;
-    }
-
-    @Override
-    public int[] getPixel(int x, int y) {
-        return pixels[x][y];
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
 }

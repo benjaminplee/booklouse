@@ -81,4 +81,15 @@ public class TileTest {
         assertEquals(t1, t2);
         assertEquals("QU", t1.letter());
     }
+
+    @Test
+    public void verifyToString() {
+        assertEquals("[A>STANDARD]", new Tile("A").toString());
+        assertEquals("[B>STANDARD]", new Tile("B").toString());
+        assertEquals("[QU>STANDARD]", new Tile("Q").toString());
+        assertEquals("[J>GREEN]", new Tile("J", Tile.Type.GREEN).toString());
+        assertEquals("[X>FIRE]", new Tile("X", Tile.Type.FIRE).toString());
+        assertEquals("[T>GOLD]", new Tile("T", Tile.Type.GOLD).toString());
+
+    }
 }
