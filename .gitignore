@@ -1,0 +1,4 @@
+build/*
+dist/*
+Thumbs.db
+TEST-yardspoon.*.xml

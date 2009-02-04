@@ -1,5 +1,6 @@
 package yardspoon.booklouse;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -66,7 +67,7 @@ public class TileFinderTest {
     @Test
     public void findWholeBoard() throws IOException {
         Image window = new BufferedImageAdapter(ImageIO.read(new FileInputStream("test/data/bookworm1.png")));
-        Tile[][] tiles = new TextTileBuilder().buildTiles(new BufferedReader(new FileReader("test/data/bookworm1_tiles.txt")));
+        Tile[][] tiles = new TextBoardBuilder().buildTiles(new BufferedReader(new FileReader("test/data/bookworm1_tiles.txt")));
 
         for(int x = 0; x < tiles.length; x++) {
             for (int y = 0; y < tiles[x].length; y++) {
@@ -79,7 +80,7 @@ public class TileFinderTest {
     @Test
     public void findWholeBoard2() throws IOException {
         Image window = new BufferedImageAdapter(ImageIO.read(new FileInputStream("test/data/bookworm2.png")));
-        Tile[][] tiles = new TextTileBuilder().buildTiles(new BufferedReader(new FileReader("test/data/bookworm2_tiles.txt")));
+        Tile[][] tiles = new TextBoardBuilder().buildTiles(new BufferedReader(new FileReader("test/data/bookworm2_tiles.txt")));
 
         for(int x = 0; x < tiles.length; x++) {
             for (int y = 0; y < tiles[x].length; y++) {
@@ -92,7 +93,7 @@ public class TileFinderTest {
     @Test
     public void findWholeBoard3() throws IOException {
         Image window = new BufferedImageAdapter(ImageIO.read(new FileInputStream("test/data/bookworm3.png")));
-        Tile[][] tiles = new TextTileBuilder().buildTiles(new BufferedReader(new FileReader("test/data/bookworm3_tiles.txt")));
+        Tile[][] tiles = new TextBoardBuilder().buildTiles(new BufferedReader(new FileReader("test/data/bookworm3_tiles.txt")));
 
         for(int x = 0; x < tiles.length; x++) {
             for (int y = 0; y < tiles[x].length; y++) {
@@ -105,7 +106,7 @@ public class TileFinderTest {
     @Test
     public void findWholeBoard4() throws IOException {
         Image window = new BufferedImageAdapter(ImageIO.read(new FileInputStream("test/data/bookworm4.png")));
-        Tile[][] tiles = new TextTileBuilder().buildTiles(new BufferedReader(new FileReader("test/data/bookworm4_tiles.txt")));
+        Tile[][] tiles = new TextBoardBuilder().buildTiles(new BufferedReader(new FileReader("test/data/bookworm4_tiles.txt")));
 
         for(int x = 0; x < tiles.length; x++) {
             for (int y = 0; y < tiles[x].length; y++) {
@@ -115,6 +116,59 @@ public class TileFinderTest {
         }
     }
 
-    // test to add ability to call with offset, using large window
+    @Test
+    public void findWholeBoardWithOffsetOfZero() throws IOException {
+        Image window = new BufferedImageAdapter(ImageIO.read(new FileInputStream("test/data/bookworm4.png")));
+        Tile[][] tiles = new TextBoardBuilder().buildTiles(new BufferedReader(new FileReader("test/data/bookworm4_tiles.txt")));
 
+        int x_offset = 0;
+        int y_offset = 0;
+
+        for(int x = 0; x < tiles.length; x++) {
+            for (int y = 0; y < tiles[x].length; y++) {
+                Tile tile = tiles[x][y];
+                assertEquals("Tile at " + x + "," + y + " didn't match.", tile, matcher.matchTile(finder.findTile(window, x, y, x_offset, y_offset)));
+            }
+        }
+    }
+
+    @Test
+    public void findWholeBoardWithNonZeroOffset() throws IOException {
+        BufferedImage desktop = ImageIO.read(new FileInputStream("test/data/example_small_desktop.png"));
+        Image desktopImage = new BufferedImageAdapter(desktop);
+        Tile[][] tiles = new TextBoardBuilder().buildTiles(new BufferedReader(new FileReader("test/data/example_small_desktop_tiles.txt")));
+
+        WindowFinder windowFinder = new WindowFinder(new MockDesktop(desktop));
+        Point offset = windowFinder.findWindow();
+
+        assertEquals(33, offset.x);
+        assertEquals(41, offset.y);
+
+        for(int x = 0; x < tiles.length; x++) {
+            for (int y = 0; y < tiles[x].length; y++) {
+                Tile tile = tiles[x][y];
+                assertEquals("Tile at " + x + "," + y + " didn't match.", tile, matcher.matchTile(finder.findTile(desktopImage, x, y, offset.x, offset.y)));
+            }
+        }
+    }
+
+    @Test
+    public void findBoardOnLargeDesktop() throws IOException {
+        BufferedImage desktop = ImageIO.read(new FileInputStream("test/data/example_desktop.png"));
+        Image desktopImage = new BufferedImageAdapter(desktop);
+        Tile[][] tiles = new TextBoardBuilder().buildTiles(new BufferedReader(new FileReader("test/data/example_desktop_tiles.txt")));
+
+        WindowFinder windowFinder = new WindowFinder(new MockDesktop(desktop));
+        Point offset = windowFinder.findWindow();
+
+        assertEquals(415, offset.x);
+        assertEquals(367, offset.y);
+
+        for(int x = 0; x < tiles.length; x++) {
+            for (int y = 0; y < tiles[x].length; y++) {
+                Tile tile = tiles[x][y];
+                assertEquals("Tile at " + x + "," + y + " didn't match.", tile, matcher.matchTile(finder.findTile(desktopImage, x, y, offset.x, offset.y)));
+            }
+        }
+    }
 }

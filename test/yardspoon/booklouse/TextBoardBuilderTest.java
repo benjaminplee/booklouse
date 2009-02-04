@@ -8,12 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class TextTileBuilderTest {
-    private TextTileBuilder builder = null;
+public class TextBoardBuilderTest {
+    private TextBoardBuilder builder = null;
 
     @Before
     public void setup() {
-        builder = new TextTileBuilder();
+        builder = new TextBoardBuilder();
     }
 
     @Test

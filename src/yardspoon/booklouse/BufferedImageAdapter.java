@@ -87,23 +87,24 @@ class BufferedImageAdapter implements Image {
             return false;
         }
 
-        int diference = 0;
-
         for (int x = 0; x < getWidth(); x++) {
             for (int y = 0; y < getHeight(); y++) {
                 final int[] thisPixel = getPixel(x, y);
                 final int[] otherPixel = other.getPixel(x, y);
-                
-                diference += Math.abs(thisPixel[0] - otherPixel[0]);
-                diference += Math.abs(thisPixel[1] - otherPixel[1]);
-                diference += Math.abs(thisPixel[2] - otherPixel[2]);
-                
-                if (diference > threshold) {
+
+                boolean thisIsBlack = isBlackPixel(thisPixel);
+                boolean otherIsBlack = isBlackPixel(otherPixel);
+
+                if((thisIsBlack && !otherIsBlack) || (otherIsBlack && !thisIsBlack)) {
                     return false;
                 }
             }
         }
 
         return true;
+    }
+
+    private boolean isBlackPixel(int[] p) {
+        return p[0] == 0 && p[1] == 0 && p[2] == 0;
     }
 }
