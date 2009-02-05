@@ -133,13 +133,12 @@ public class TileFinderTest {
     }
 
     @Test
-    public void findWholeBoardWithNonZeroOffset() throws IOException {
+    public void findWholeBoardWithNonZeroOffset() throws IOException, Exception {
         BufferedImage desktop = ImageIO.read(new FileInputStream("test/data/example_small_desktop.png"));
         Image desktopImage = new BufferedImageAdapter(desktop);
         Tile[][] tiles = new TextBoardBuilder().buildTiles(new BufferedReader(new FileReader("test/data/example_small_desktop_tiles.txt")));
 
-        WindowFinder windowFinder = new WindowFinder(new MockDesktop(desktop));
-        Point offset = windowFinder.findWindow();
+        Point offset = new WindowFinder().findWindow(new MockDesktop(desktop).getDesktop());
 
         assertEquals(33, offset.x);
         assertEquals(41, offset.y);
@@ -153,13 +152,12 @@ public class TileFinderTest {
     }
 
     @Test
-    public void findBoardOnLargeDesktop() throws IOException {
+    public void findBoardOnLargeDesktop() throws IOException, Exception {
         BufferedImage desktop = ImageIO.read(new FileInputStream("test/data/example_desktop.png"));
         Image desktopImage = new BufferedImageAdapter(desktop);
         Tile[][] tiles = new TextBoardBuilder().buildTiles(new BufferedReader(new FileReader("test/data/example_desktop_tiles.txt")));
 
-        WindowFinder windowFinder = new WindowFinder(new MockDesktop(desktop));
-        Point offset = windowFinder.findWindow();
+        Point offset = new WindowFinder().findWindow(new MockDesktop(desktop).getDesktop());
 
         assertEquals(415, offset.x);
         assertEquals(367, offset.y);

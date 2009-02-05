@@ -10,28 +10,22 @@ import static org.junit.Assert.*;
 public class WindowFinderTest {
 
     @Test
-    public void findTheWindowInASmallDesktopImage() throws IOException {
-        WindowFinder finder = new WindowFinder(new MockDesktop(ImageIO.read(new FileInputStream("test\\data\\example_small_desktop.png"))));
-
-        Point point = finder.findWindow();
+    public void findTheWindowInASmallDesktopImage() throws IOException, Exception {
+        Point point = new WindowFinder().findWindow(new MockDesktop(ImageIO.read(new FileInputStream("test\\data\\example_small_desktop.png"))).getDesktop());
 
         assertEquals(new Point(33, 41), point);
     }
 
     @Test
-    public void findWindowOnLargeDesktop() throws IOException {
-        WindowFinder finder = new WindowFinder(new MockDesktop(ImageIO.read(new FileInputStream("test\\data\\example_desktop.png"))));
-
-        Point point = finder.findWindow();
+    public void findWindowOnLargeDesktop() throws IOException, Exception {
+        Point point = new WindowFinder().findWindow(new MockDesktop(ImageIO.read(new FileInputStream("test\\data\\example_desktop.png"))).getDesktop());
 
         assertEquals(new Point(415, 367), point);
     }
 
     @Test
-    public void returnNullIfCantFindWindow() throws IOException {
-        WindowFinder finder = new WindowFinder(new MockDesktop(ImageIO.read(new FileInputStream("test\\data\\no_window_desktop.png"))));
-
-        Point point = finder.findWindow();
+    public void returnNullIfCantFindWindow() throws IOException, Exception {
+        Point point = new WindowFinder().findWindow(new MockDesktop(ImageIO.read(new FileInputStream("test\\data\\no_window_desktop.png"))).getDesktop());
 
         assertNull(point);
     }
