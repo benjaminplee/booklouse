@@ -17,7 +17,7 @@ class Dictionary {
     void load(BufferedReader bufferedReader) throws IOException {
         String word = null;
         while ((word = bufferedReader.readLine()) != null) {
-            wordList.add(word);
+            wordList.add(word.toUpperCase());
         }
 
         Collections.sort(wordList);
