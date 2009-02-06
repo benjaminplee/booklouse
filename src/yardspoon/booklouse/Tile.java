@@ -33,6 +33,7 @@ class Tile {
         STANDARD,
         GREEN,
         GOLD,
+        DIAMOND,
         FIRE;
     }
 

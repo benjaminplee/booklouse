@@ -100,7 +100,7 @@ public class BufferedImageAdapterTest {
 
     @Test
     public void imagesOnlyFuzzyEqualsCorrectImageAndNotOthers() throws IOException {
-        Map<Image, Tile> loadedTiles = new ReferenceTileLoader().loadDirectory("test/data/normal_tiles");
+        Map<Image, Tile> loadedTiles = new ReferenceTileLoader().loadStandardReferenceTiles("test/data/normal_tiles");
 
         for (Image baseImage : loadedTiles.keySet()) {
             Tile baseTile = loadedTiles.get(baseImage);

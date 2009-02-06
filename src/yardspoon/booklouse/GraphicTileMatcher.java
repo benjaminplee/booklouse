@@ -7,7 +7,7 @@ public class GraphicTileMatcher {
     private final Map<Image, Tile> tileMap;
 
     public GraphicTileMatcher() throws IOException {
-        tileMap = new ReferenceTileLoader().loadDirectory("src/data/normal_tiles");
+        tileMap = new ReferenceTileLoader().loadStandardReferenceTiles("src/data/normal_tiles");
     }
 
     Tile matchTile(Image graphicTile) {

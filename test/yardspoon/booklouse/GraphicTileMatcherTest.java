@@ -28,7 +28,7 @@ public class GraphicTileMatcherTest {
 
     @Test
     public void matchNormalLetters() throws IOException {
-        Map<Image, Tile> loadedTiles = new ReferenceTileLoader().loadDirectory("test/data/normal_tiles");
+        Map<Image, Tile> loadedTiles = new ReferenceTileLoader().loadStandardReferenceTiles("test/data/normal_tiles");
 
         assertEquals(26, loadedTiles.size());
 

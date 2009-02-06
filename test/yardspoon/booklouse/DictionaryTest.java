@@ -35,11 +35,11 @@ public class DictionaryTest {
         dictionary.load(input);
         input.close();
 
-        assertTrue(dictionary.lookup("bear").wasFound);
-        assertTrue(dictionary.lookup("bare").wasFound);
-        assertTrue(dictionary.lookup("bar").wasFound);
-        assertTrue(dictionary.lookup("fear").wasFound);
-        assertTrue(dictionary.lookup("dear").wasFound);
+        assertTrue(dictionary.lookup("bear".toUpperCase()).wasFound);
+        assertTrue(dictionary.lookup("bare".toUpperCase()).wasFound);
+        assertTrue(dictionary.lookup("bar".toUpperCase()).wasFound);
+        assertTrue(dictionary.lookup("fear".toUpperCase()).wasFound);
+        assertTrue(dictionary.lookup("dear".toUpperCase()).wasFound);
     }
 
     @Test
@@ -48,11 +48,11 @@ public class DictionaryTest {
         dictionary.load(input);
         input.close();
 
-        assertFalse(dictionary.lookup("dog").wasFound);
-        assertFalse(dictionary.lookup("cat").wasFound);
-        assertFalse(dictionary.lookup("fat").wasFound);
-        assertFalse(dictionary.lookup("the").wasFound);
-        assertFalse(dictionary.lookup("through").wasFound);
+        assertFalse(dictionary.lookup("dog".toUpperCase()).wasFound);
+        assertFalse(dictionary.lookup("cat".toUpperCase()).wasFound);
+        assertFalse(dictionary.lookup("fat".toUpperCase()).wasFound);
+        assertFalse(dictionary.lookup("the".toUpperCase()).wasFound);
+        assertFalse(dictionary.lookup("through".toUpperCase()).wasFound);
     }
 
     @Test
@@ -65,13 +65,13 @@ public class DictionaryTest {
         dictionary.load(input);
         input.close();
 
-        assertTrue(dictionary.lookup("bear").wasFound);
-        assertTrue(dictionary.lookup("bare").wasFound);
-        assertTrue(dictionary.lookup("bar").wasFound);
-        assertTrue(dictionary.lookup("fear").wasFound);
-        assertTrue(dictionary.lookup("dear").wasFound);
-        assertTrue(dictionary.lookup("dog").wasFound);
-        assertTrue(dictionary.lookup("cat").wasFound);
+        assertTrue(dictionary.lookup("bear".toUpperCase()).wasFound);
+        assertTrue(dictionary.lookup("bare".toUpperCase()).wasFound);
+        assertTrue(dictionary.lookup("bar".toUpperCase()).wasFound);
+        assertTrue(dictionary.lookup("fear".toUpperCase()).wasFound);
+        assertTrue(dictionary.lookup("dear".toUpperCase()).wasFound);
+        assertTrue(dictionary.lookup("dog".toUpperCase()).wasFound);
+        assertTrue(dictionary.lookup("cat".toUpperCase()).wasFound);
     }
 
     @Test
@@ -80,9 +80,9 @@ public class DictionaryTest {
         dictionary.load(input);
         input.close();
 
-        assertFalse(dictionary.lookup("bear").isPrefix);
-        assertTrue(dictionary.lookup("bea").isPrefix);
-        assertTrue(dictionary.lookup("bar").isPrefix);
-        assertFalse(dictionary.lookup("c").isPrefix);
+        assertFalse(dictionary.lookup("bear".toUpperCase()).isPrefix);
+        assertTrue(dictionary.lookup("bea".toUpperCase()).isPrefix);
+        assertTrue(dictionary.lookup("bar".toUpperCase()).isPrefix);
+        assertFalse(dictionary.lookup("c".toUpperCase()).isPrefix);
     }
 }

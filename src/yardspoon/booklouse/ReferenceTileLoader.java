@@ -9,7 +9,11 @@ import javax.imageio.ImageIO;
 
 public class ReferenceTileLoader {
 
-    Map<Image, Tile> loadDirectory(String folderPath) throws IOException {
+    Map<Image, Tile> loadGreenReferenceTiles(String string) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    Map<Image, Tile> loadStandardReferenceTiles(String folderPath) throws IOException {
         Map<Image, Tile> imageTileMap = new HashMap<Image, Tile>();
         File folder = new File(folderPath);
 
