@@ -1,6 +1,5 @@
 package yardspoon.booklouse;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,37 +36,5 @@ public class ReferenceTileLoaderTest {
         }
 
         assertEquals(0, referenceLetters.size());
-    }
-
-    @Test
-    public void loadGreenTiles() throws IOException {
-        File greenTestDir = new File("test/data/green_tiles");
-        List<String> foundLetterList = new ArrayList<String>();
-
-        for (File file : greenTestDir.listFiles()) {
-            if(file.isFile()) {
-                String fileName = file.getName();
-                assertTrue(fileName.endsWith(".png"));
-                assertEquals(5, fileName.length());
-
-                String letter = String.valueOf(fileName.charAt(0));
-
-                foundLetterList.add(letter);
-            }
-        }
-
-        Map<Image, Tile> result = loader.loadGreenReferenceTiles("test/data/green_tiles");
-        
-        assertEquals(foundLetterList.size(), result.size());
-
-        for (Image image : result.keySet()) {
-            Tile tile = result.get(image);
-
-            assertTrue(tile.type() == Tile.Type.GREEN);
-            assertTrue(foundLetterList.contains(tile.letter()));
-            foundLetterList.remove(tile.letter());
-        }
-
-        assertEquals(0, foundLetterList.size());
     }
 }

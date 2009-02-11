@@ -2,6 +2,7 @@ package yardspoon.booklouse;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -9,7 +10,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("Loading Dictionary.");
         Dictionary dictionary = new Dictionary();
-        dictionary.load(new BufferedReader(new FileReader("src/data/word_list.txt")));
+        dictionary.load(new BufferedReader(new FileReader("src/data/word_list_big.txt")));
 
         WordFinder wordFinder = new WordFinder();
         wordFinder.setDictionary(dictionary);
@@ -35,6 +36,9 @@ public class Main {
 
         System.out.println("Finding Words.");
         List<Word> words = wordFinder.findWords(board);
+
+        System.out.println("Sorting Words");
+        Collections.sort(words, Collections.reverseOrder(new ByLengthWordComparator()));
 
         System.out.println("Found " + words.size() + " words.");
 
